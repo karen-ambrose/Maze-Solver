@@ -1,0 +1,68 @@
+def read_maze(file_name):
+    maze = []
+    with open(file_name, 'r') as file:
+        for line in file:
+            maze.append(list(line.strip()))
+    return maze
+
+def find_starting_point(maze):
+    # Iterate through the maze to find the starting point 'S'
+    for row in range(len(maze)):
+        for col in range(len(maze[row])):
+            if maze[row][col] == 'S':
+                return row, col
+    return None
+
+def dfs(maze, start_row, start_col, coins):
+    # Define the possible movements (up, down, left, right)
+    movements = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Check if the current position is out of bounds, a wall, or already visited
+    if (start_row < 0 or start_row >= len(maze) or
+        start_col < 0 or start_col >= len(maze[0]) or
+        maze[start_row][start_col] == 'X' or
+        maze[start_row][start_col] == 'V'):
+        return coins
+    
+    # Check if the current position is the goal
+    if maze[start_row][start_col] == 'G':
+        return coins
+    
+    # Check if the current position has coins
+    if maze[start_row][start_col].isdigit():
+        coins += int(maze[start_row][start_col])
+    
+    # Mark the current position as visited
+    maze[start_row][start_col] = 'V'
+    
+    # Explore the neighboring cells
+    for movement in movements:
+        next_row = start_row + movement[0]
+        next_col = start_col + movement[1]
+        coins = dfs(maze, next_row, next_col, coins)
+    
+    return coins
+
+def solve_maze(file_name):
+    # Read the maze from the file
+    maze = read_maze(file_name)
+    
+    # Find the starting point 'S' in the maze
+    start_position = find_starting_point(maze)
+    
+    if start_position is None:
+        print("Starting point 'S' not found in the maze.")
+        return
+    
+    # Extract the row and column indices of the starting point
+    start_row, start_col = start_position
+    
+    # Solve the maze using depth-first search (DFS)
+    coins = dfs(maze, start_row, start_col, 0)
+    
+    # Print the total coins collected
+    print("Total coins collected:", coins)
+
+# Example usage:
+solve_maze('maze_11x11.txt')
+
