@@ -27,3 +27,5 @@ G503746
 3375042
 
 Solution is  6+1+3+8+4+6+4+7+3+0+5== 47
+
+This code implements the Depth first search algorithm.
