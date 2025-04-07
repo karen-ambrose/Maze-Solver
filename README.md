@@ -1,31 +1,35 @@
-# Maze-Solver
 
-You are placed in a maze with a starting point S.
+### 🧩 Maze Solver – Coin Collector Edition
 
-Your need to find your way to goal G and collect some coins on the way.
+This Python program solves a coin-collecting maze using **Depth-First Search (DFS)**.  
 
-Walls are X, each cell in a passage has some coins 0 to 9.
+You begin at the **starting point `S`** and aim to reach the **goal `G`**, collecting as many coins as possible along the way. The total number of coins collected is the **solution**.
 
-Outside maze is lava.
+#### 🧱 Maze Structure
 
-This is a Python program to read text files and solve the maze.
-The solution is sum of coins collected on the way out of maze.
-Example:
+- `S`: Start position  
+- `G`: Goal position  
+- `X`: Wall (cannot pass through)  
+- `0`–`9`: Coin values in each cell  
+- Lava surrounds the maze (stay inside!)  
 
-G503746 
+#### 📄 Example Input (Text File)
 
-0XXXXX4 
-
-3XS6138 
-
-3XXXXXX 
-
-1X19736 
-
-5XXXXX8 
-
+```
+G503746
+0XXXXX4
+3XS6138
+3XXXXXX
+1X19736
+5XXXXX8
 3375042
+```
 
-Solution is  6+1+3+8+4+6+4+7+3+0+5== 47
+#### ✅ Sample Solution Path
+```
+S → 6 → 1 → 3 → 8 → 4 → 6 → 4 → 7 → 3 → 0 → G
+```
 
-This code implements the Depth first search algorithm.
+**Coins collected** = `6 + 1 + 3 + 8 + 4 + 6 + 4 + 7 + 3 + 0 + 5` = **47**
+
+---
